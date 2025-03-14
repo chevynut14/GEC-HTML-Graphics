@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Previous Season Stats</title>
+<style>
+  body {
+    font-family: sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+    background-size: 20px 20px;
+    background-blend-mode: multiply;
+  }
+  h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  #fileInput, #backgroundImageInput {
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  #filters {
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  #filters label {
+    margin: 0 10px;
+    font-size: 14px;
+  }
+  #output {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .stat-table {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  .stat-table h2 {
+    background-color: #333;
+    color: white;
+    padding: 5px;
+    margin: 0;
+    font-size: 16px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .stat-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .stat-table th, .stat-table td {
+    padding: 4px;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+  }
+  .stat-table th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+  }
+  .stat-table tr:nth-child(even) {
+    background-color: #f8f8f8;
+  }
+  .stat-table button {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 3px;
+  }
+  .stat-table button:hover {
+    background-color: #777;
+  }
+</style>
+</head>
+<body>
+
+<h1>Previous Season Stats</h1>
+
+<input type="file" id="fileInput">
+<input type="file" id="backgroundImageInput" accept="image/*">
+<button id="saveButton">Save as HTML</button>
+
+<div id="filters">
+  <h2>Filters</h2>
+</div>
+
+<div id="output"></div>
+
+<script>
+document.getElementById('fileInput').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      processData(data);
+    } catch (error) {
+      document.getElementById('output').innerHTML = '<p>Error parsing JSON file.</p>';
+      console.error("JSON parsing error:", error);
+    }
+  };
+
+  reader.readAsText(file);
+});
+
+document.getElementById('backgroundImageInput').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    document.body.style.backgroundImage = `url('${e.target.result}')`;
+    document.body.style.backgroundSize = "300px";
+    document.body.style.backgroundPosition = "1500px 10px";
+    document.body.style.backgroundRepeat = 'no-repeat';
+  };
+
+  reader.readAsDataURL(file);
+});
+
+function processData(data) {
+  const statistics = Object.keys(data[0]).filter(key => key !== "Driver");
+  const order = {};
+  const filters = {};
+  statistics.forEach(stat => {
+    order[stat] = false;
+    filters[stat] = true;
+  });
+
+  function generateFilters() {
+    let filterHtml = "";
+    statistics.forEach(stat => {
+      filterHtml += `<label><input type="checkbox" id="filter-${stat}" checked onclick="updateTables()"> ${stat}</label> `;
+    });
+    document.getElementById('filters').innerHTML = `<h2>Filters</h2>${filterHtml}`;
+  }
+
+  function generateTables() {
+    let html = "";
+    statistics.forEach(stat => {
+      if (filters[stat]) {
+        const sorted = [...data].sort((a, b) => {
+          const valueA = parseFloat(String(a[stat]).replace(/,/g, ''));
+          const valueB = parseFloat(String(b[stat]).replace(/,/g, ''));
+          if (order[stat]) {
+            return valueA - valueB;
+          } else {
+            return valueB - valueA;
+          }
+        });
+        const top10 = sorted.slice(0, 10);
+
+        html += `<div class="stat-table"><h2>Top 10 ${stat} <button onclick="toggleOrder('${stat}')">Toggle</button></h2><table><tr><th>Driver</th><th>Value</th></tr>`;
+        top10.forEach(driver => {
+          html += `<tr><td>${driver.Driver}</td><td>${driver[stat]}</td></tr>`;
+        });
+        html += `</table></div>`;
+      }
+    });
+    document.getElementById('output').innerHTML = html;
+  }
+
+  window.toggleOrder = function(stat) {
+    order[stat] = !order[stat];
+    generateTables();
+  };
+
+  window.updateTables = function() {
+    statistics.forEach(stat => {
+      filters[stat] = document.getElementById(`filter-${stat}`).checked;
+    });
+    generateTables();
+  };
+
+  generateFilters();
+  generateTables();
+}
+
+document.getElementById('saveButton').addEventListener('click', function() {
+  const htmlContent = generateFullHTML();
+  const blob = new Blob([htmlContent], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'driver_stats.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+
+function generateFullHTML() {
+  const originalHTML = document.documentElement.outerHTML;
+  const outputHTML = document.getElementById('output').innerHTML;
+  const filtersHTML = document.getElementById('filters').innerHTML;
+  const fileInputHTML = document.getElementById('fileInput').outerHTML;
+  const backgroundImgInputHTML = document.getElementById('backgroundImageInput').outerHTML;
+  const saveButtonHTML = document.getElementById('saveButton').outerHTML;
+
+  // Get the background image style
+  const backgroundImageStyle = document.body.style.backgroundImage;
+  const backgroundSizeStyle = document.body.style.backgroundSize;
+  const backgroundRepeatStyle = document.body.style.backgroundRepeat;
+
+  // Replace the dynamic parts in the original HTML
+  let fullHTML = originalHTML.replace('<div id="output"></div>', `<div id="output">${outputHTML}</div>`);
+  fullHTML = fullHTML.replace('<div id="filters"><h2>Filters</h2></div>', `<div id="filters">${filtersHTML}</div>`);
+  fullHTML = fullHTML.replace('<input type="file" id="fileInput">', fileInputHTML);
+  fullHTML = fullHTML.replace('<input type="file" id="backgroundImageInput" accept="image/*">', backgroundImgInputHTML);
+  fullHTML = fullHTML.replace('<button id="saveButton">Save as HTML</button>', saveButtonHTML);
+
+  // Add the background image style to the body
+  fullHTML = fullHTML.replace('<body', `<body style="background-image: ${backgroundImageStyle}; background-size: ${backgroundSizeStyle}; background-repeat: ${backgroundRepeatStyle};"`);
+
+  return fullHTML;
+}
+</script>
+
+</body>
+</html>

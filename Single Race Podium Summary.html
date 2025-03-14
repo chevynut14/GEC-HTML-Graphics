@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>GEC Cup Podium</title>
+<style>
+  body {
+    font-family: 'Bebas Neue';
+    background-color: #222;
+    margin: 0;
+    padding: 1px;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://media.discordapp.net/attachments/1106311732596588547/1348482433837957162/image.png?ex=67d199e1&is=67d04861&hm=b3aa5b564a374793c6ab9c8e325e4f65916084959d976fdb7639302a08cf935c&=&format=webp&quality=lossless&width=1872&height=747');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    position: relative; /* Needed for absolute positioning of logo */
+  }
+  h1 {
+    text-align: center;
+    color: #c9de06;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+    margin-bottom: 30px;
+    font-size: 5em;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    animation: pulse 2s infinite alternate;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+
+  }
+  @keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
+  }
+  .Group-group {
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    border: 2px solid #fb6600;
+  }
+  .Group-group h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 4px dashed #fb6600;
+    padding-bottom: 10px;
+    color: #c9de06;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 4em;
+  }
+  .CardTitle-card {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    padding: 12px;
+    margin-bottom: 20px;
+    width: 450px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid #555;
+  }
+  .Summary-card {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    padding: 12px;
+    margin-bottom: 20px;
+    width: 99%;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid #555;
+  }
+  .CardTitle-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+    border-color: #ffcc00;
+  }
+  .CardTitle-card h3 {
+    margin-top: 8px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 2.5em;
+    letter-spacing: 2px;
+  }
+  .CardTitle-card p {
+    margin: 6px 0;
+    font-size: 2em;
+    color: #ddd;
+    display: inline-block;
+    width: 50%;
+    vertical-align: top;
+  }
+  .Summary-card s {
+    margin: 6px 0;
+    font-size: 2em;
+    color: #ddd;
+    display: inline-block;
+    width: 50%;
+    vertical-align: top;
+  }
+  .CardTitle-card .Driver {
+    width: 100%;
+    display: block;
+  }
+	bio-container  {
+    width: 100%;
+    font-size: 2em;
+    padding-top: 10px;
+    margin-top: 10px;
+    display: block;
+}
+
+	Summary-container  {
+    width: 100%;
+    font-size: 2em;
+    padding-top: 10px;
+    margin-top: 10px;
+    display: block;
+}
+  .CardTitle-image {
+    width: 100%;
+    height: auto;
+    max-height: 750px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  }
+  #fileInput {
+    display: block;
+    margin: 25px auto;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #76c363, #76c363);
+    color: #222;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  #fileInput:hover {
+    background: linear-gradient(135deg, #ffb300, #ffa500);
+    transform: scale(1.05);
+  }
+  #output {
+    margin-top: 30px;
+  }
+  .hidden {
+    display: none;
+  }
+  .logoL {
+
+    top: 10px;
+    left: 10px;
+    height: 160px; /* Adjust as needed */
+    width: auto;
+  position: Absolute;
+  z-index: 999;
+  }
+  .logoR {
+    top: 10px;
+    Right: 10px;
+    height: 160px; /* Adjust as needed */
+    width: auto;
+  position: fixed;
+  z-index: 999;
+    }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<img src="https://media.discordapp.net/attachments/802288735756222465/808094462604607488/order1594a1-2.png?ex=67d15add&is=67d0095d&hm=44c34a6d1ee950187d2ed01a32de5d4d6c93373c1b9ef7499c879dd35160dd3e&=&format=webp&quality=lossless&width=1433&height=856" class="logoL">
+
+<img src="https://cdn.discordapp.com/attachments/1210252227248132138/1210252340217516042/ICON_Logo.png?ex=67d1ad53&is=67d05bd3&hm=69f99cac4216d9bdda6129adad347512595c6bece28ec4890e34f3da03414aa4&" class="logoR">
+
+<h1>Race Recap</h1>
+
+<input type="file" id="fileInput" accept=".csv">
+
+<div id="output"></div>
+
+<script>
+document.getElementById('fileInput').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    const csv = e.target.result;
+    const data = parseCSV(csv);
+    generateGroupGroups(data);
+    document.getElementById('fileInput').style.display = 'none';
+  };
+
+  reader.readAsText(file);
+});
+
+function parseCSV(csv) {
+  const lines = csv.split('\n');
+  const headers = lines[0].split(',');
+  const result = [];
+
+  for (let i = 1; i < lines.length; i++) {
+    const obj = {};
+    const currentLine = lines[i].split(',');
+
+    for (let j = 0; j < headers.length; j++) {
+      obj[headers[j].trim()] = currentLine[j] ? currentLine[j].trim() : "";
+    }
+    result.push(obj);
+  }
+  return result;
+}
+
+function generateGroupGroups(data) {
+  const Groups = {};
+  data.forEach(CardTitle => {
+    if (!Groups[CardTitle.Group]) {
+      Groups[CardTitle.Group] = [];
+    }
+    Groups[CardTitle.Group].push(CardTitle);
+  });
+
+ let html = '';
+  for (const Group in Groups) {
+    html += `<div class="Group-group"><h2>${Group}</h2>`;
+    Groups[Group].forEach(CardTitle => {
+ 
+      if (CardTitle.Image) {
+        html += `<img src="${CardTitle.Image}" alt="${CardTitle.CardTitle}" class="CardTitle-image">`;
+      }
+     if (CardTitle.RaceSummary === "") {
+      html += '<div class="CardTitle-card">';
+	html += `<h3>- ${CardTitle.CardTitle} - ${CardTitle.Driver}</h3>`;
+
+}	else {html += '<div class="Summary-card">';
+}
+             const stats = [];
+      let bio = "";
+      for (const key in CardTitle) {
+        if (key === "RaceSummary" && CardTitle[key] !== "") {
+	
+          bio = `<bio-container class="s"> ${CardTitle[key]}</bio-container>`;
+        } else if (key !== 'CardTitle' && key !== 'Group' && key !== 'Image' && key !== "Driver" && key !== "RaceSummary" && CardTitle[key] !== "") {
+          stats.push(`<p><strong>${key}:</strong> ${CardTitle[key]}</p>`);
+        } 
+      }
+      html += stats.join('');
+      html += bio ? `<div class="bio-container">${bio}</div>` : "";
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+  document.getElementById('output').innerHTML = html;
+}
+</script>
+
+</body>
+</html>

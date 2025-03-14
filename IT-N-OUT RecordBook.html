@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>IT-N-Out Record Book</title>
+<style>
+  body {
+    font-family: 'Bebas Neue';
+    background-color: #222;
+    margin: 0;
+    padding: 1px;
+    background-image: url('https://media.discordapp.net/attachments/1331816085548175363/1345931626366111796/NASCAR_Class_A_Scene_-_001_-_Toyota.jpg?ex=67d0e401&is=67cf9281&hm=a00a90b0d9aec5fc4fb7f116385afcc073a1ec1983c8594f1b5f656d6bcfac16&=&format=webp&width=1522&height=856');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    position: relative; /* Needed for absolute positioning of logo */
+  }
+  h1 {
+    text-align: center;
+    color: #76c363;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+    margin-bottom: 30px;
+    font-size: 5em;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    animation: pulse 2s infinite alternate;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  }
+  @keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
+  }
+  .Group-group {
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    border: 2px solid #418dc2;
+  }
+  .Group-group h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 4px dashed #418dc2;
+    padding-bottom: 10px;
+    color: #418dc2;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 4em;
+  }
+  .CardTitle-card {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    padding: 12px;
+    margin-bottom: 20px;
+    width: 400px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid #555;
+  }
+  .CardTitle-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+    border-color: #ffcc00;
+  }
+  .CardTitle-card h3 {
+    margin-top: 8px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 2.5em;
+    letter-spacing: 2px;
+  }
+  .CardTitle-card p {
+    margin: 6px 0;
+    font-size: 2em;
+    color: #ddd;
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+  }
+  .CardTitle-card .bio {
+    width: 100%;
+    display: block;
+  }
+  .CardTitle-image {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  }
+  #fileInput {
+    display: block;
+    margin: 25px auto;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #76c363, #76c363);
+    color: #222;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  #fileInput:hover {
+    background: linear-gradient(135deg, #ffb300, #ffa500);
+    transform: scale(1.05);
+  }
+  #output {
+    margin-top: 30px;
+  }
+  .hidden {
+    display: none;
+  }
+  .logoL {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 160px; /* Adjust as needed */
+    width: auto;
+    z-index: 10; /* Ensure it's above other elements */
+  }
+  .logoR {
+    top: 10px;
+    Right: 10px;
+    height: 160px; /* Adjust as needed */
+    width: auto;
+  position: fixed;
+  z-index: 999;
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<img src="https://cdn.discordapp.com/attachments/1332561917297954907/1336487849695907851/mascot.png?ex=67d0cfce&is=67cf7e4e&hm=ecc46e6a520cd6da450f845ac6e232923526b54f1dda4e1126c4b266dff5ff85&" class="logoL">
+
+<img src="https://cdn.discordapp.com/attachments/1331817198121127988/1332125948388184145/5.31.RACING10_1.webp?ex=67d0c377&is=67cf71f7&hm=4286fe3d026e905be592f6a860ccc0ce30e611651aec3490a4bbc1b4db168404&" class="logoR">
+
+<h1>IT-N-Out Record Book</h1>
+
+<input type="file" id="fileInput" accept=".csv">
+
+<div id="output"></div>
+
+<script>
+document.getElementById('fileInput').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    const csv = e.target.result;
+    const data = parseCSV(csv);
+    generateGroupGroups(data);
+    document.getElementById('fileInput').style.display = 'none';
+  };
+
+  reader.readAsText(file);
+});
+
+function parseCSV(csv) {
+  const lines = csv.split('\n');
+  const headers = lines[0].split(',');
+  const result = [];
+
+  for (let i = 1; i < lines.length; i++) {
+    const obj = {};
+    const currentLine = lines[i].split(',');
+
+    for (let j = 0; j < headers.length; j++) {
+      obj[headers[j].trim()] = currentLine[j] ? currentLine[j].trim() : "";
+    }
+    result.push(obj);
+  }
+  return result;
+}
+
+function generateGroupGroups(data) {
+  const Groups = {};
+  data.forEach(CardTitle => {
+    if (!Groups[CardTitle.Group]) {
+      Groups[CardTitle.Group] = [];
+    }
+    Groups[CardTitle.Group].push(CardTitle);
+  });
+
+  let html = '';
+  for (const Group in Groups) {
+    html += `<div class="Group-group"><h2>${Group}</h2>`;
+    Groups[Group].forEach(CardTitle => {
+      html += '<div class="CardTitle-card">';
+      if (CardTitle.Image) {
+        html += `<img src="${CardTitle.Image}" alt="${CardTitle.CardTitle}" class="CardTitle-image">`;
+      }
+      html += `<h3>${CardTitle.CardTitle}</h3>`;
+      const stats = [];
+      let bio = "";
+      for (const key in CardTitle) {
+        if (key === "BIO" && CardTitle[key] !== "") {
+          bio = `<p class="bio"><strong>${key}:</strong> ${CardTitle[key]}</p>`;
+        } else if (key !== 'CardTitle' && key !== 'Group' && key !== 'Image' && key !== "BIO" && CardTitle[key] !== "") {
+          stats.push(`<p><strong>${key}:</strong> ${CardTitle[key]}</p>`);
+        }
+      }
+      html += stats.join('');
+      html += bio;
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+  document.getElementById('output').innerHTML = html;
+}
+</script>
+
+</body>
+</html>
